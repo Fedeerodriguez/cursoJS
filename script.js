@@ -1,5 +1,41 @@
 
-function solicitarNombre() {
+let productos =  [
+    {id: 4, nombre: "remera rayada", categoria: "indumentaria", stock: 5, precio: 1500 },
+    {id: 6, nombre: "pelota de futbol", categoria: "deportes", stock: 9, precio: 1900 },
+    {id: 8, nombre: "lentes de sol", categoria: "indumentaria", stock: 4, precio: 700 },
+    {id: 12, nombre: "guantes de golero", categoria: "deportes", stock: 7, precio: 1400 },
+    {id: 10, nombre: "campera de cuero", categoria: "indumentaria", stock: 2, precio: 3100 },
+    {id: 2, nombre: "gorra", categoria: "indumentaria", stock: 12, precio: 800 },
+    {id: 9, nombre: "paleta de ping ping", categoria: "deportes", stock: 5, precio: 2200 },
+    {id: 11, nombre: "camisa rayada", categoria: "indumentaria", stock: 8, precio: 990 },
+    {id: 17, nombre: "canilleras", categoria: "deportes", stock: 3, precio: 1300 }
+
+]
+
+
+let carrito =[]
+
+let opcion
+do {
+    opcion =  Number(prompt("Ingrese una opcion:\n1 - Listar productos\n2 - Agregar al carrito\n3 - Ver informacion de un producto en particular\n4 - Filtrar por precios\n5 - Ordenar por nombres asc\n 6 - Ordenar por nombre desc\n7 - Ordenar por precios asc\n8 - Ordenar por precio desc\n9 finalizar compras\n0 - para salir  "))
+    if(opcion === 1){
+      alert(listar(productos))
+    } else if(opcion === 2){
+        
+    }
+
+} while (opcion != 0)
+
+
+
+function listar(productos) {
+   return productos.map(producto => producto.id+ " "+ producto.nombre).join("\n")
+    
+}
+
+
+
+/* function solicitarNombre() {
     let nombreIngresado = prompt("Hola buenas, Bienvenido a nuestra pequeña almacen. Por favor diganos como se llama usted")
     alert("Bienvenido "+ nombreIngresado)
 }
@@ -42,4 +78,4 @@ do {
         break;
     }
 
-} while (option != 0)
+} while (option != 0) */

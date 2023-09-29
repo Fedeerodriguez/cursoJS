@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+ .Contenedor{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.tarjeta{
+    margin: 20px;
+    border-radius: 6px;
+    text-align: center;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+    cursor: default;
+    transition: all 400ms ease;
+}
+.tarjeta:hover{
+    box-shadow: 5px 5px 120px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3%);
+
+}
+
+ h3{
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.botones{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: inline-block;
+    padding: 10px;
+    color: #2fb4cc;
+    border: 1px solid #2fb4cc;
+    border-radius: 4px;
+    transform: all 400ms ease;
+}
+.botones:hover{
+    background: #2fb4cc;
+    color: #fff;
+}
+ .imagenes{
+    width: 200px;
+    height: 200px;
+} 

@@ -1,21 +1,33 @@
 
 // El array de objetos (Los productos)
 let productos = [
-    { id: 4, nombre: "guantes de boxeo", categoria: "boxeo", stock: 5, precio: 1500, rutaImg: "guantes-de-boxeo.jpg"},
-    { id: 6, nombre: "pelota de futbol", categoria: "futbol", stock: 9, precio: 1900, rutaImg: "pelota-de-futbol.jpg"},
-    { id: 8, nombre: "guante de beisbol", categoria: "beisbol", stock: 4, precio: 700, rutaImg: "guante-de-beisbol.jpg"},
-    { id: 12, nombre: "guantes de golero", categoria: "futbol", stock: 7, precio: 1400, rutaImg: "guantes-de-golero.jpg"},
-    { id: 10, nombre: "raqueta de tenis", categoria: "tenis", stock: 2, precio: 3100, rutaImg: "raqueta-de-tenis.jpg"},
-    { id: 2, nombre: "gorra de beisbol", categoria: "beisbol", stock: 12, precio: 800, rutaImg: "gorra-de-beisbol.jpg"},
-    { id: 9, nombre: "pelota de tenis", categoria: "tenis", stock: 5, precio: 2200, rutaImg: "pelota-de-tenis.jpg"},
-    { id: 11, nombre: "bolso de tenis", categoria: "tenis", stock: 8, precio: 990, rutaImg: "bolso-de-tenis"},
-    { id: 17, nombre: "medias de futbol", categoria: "futbol", stock: 3, precio: 850, rutaImg: "medias-de-futbol.jpg"},
-    { id: 15, nombre: "bate de beisbol", categoria: "beisbol", stock: 7, precio: 2300, rutaImg: "bate-de-beisbol.jpg"},
-    { id: 7, nombre: "bucal de boxeo", categoria: "boxeo", stock: 10, precio: 1100, rutaImg: "bucal-de-boxeo.jpg"},
-    { id: 13, nombre: "bolsa de boxeo", categoria: "boxeo", stock: 6, precio: 2750, rutaImg: "bolsa-de*boxeo.jpg"}
+    { id: 4, nombre: "Guantes de boxeo", categoria: "boxeo", stock: 5, precio: 1500, rutaImg: "guantes-de-boxeo.jpg"},
+    { id: 6, nombre: "Pelota de futbol", categoria: "futbol", stock: 9, precio: 1900, rutaImg: "pelota-de-futbol.jpg"},
+    { id: 8, nombre: "Guante de beisbol", categoria: "beisbol", stock: 4, precio: 700, rutaImg: "guante-de-beisbol.jpg"},
+    { id: 12, nombre: "Guantes de golero", categoria: "futbol", stock: 7, precio: 1400, rutaImg: "guantes-de-golero.jpg"},
+    { id: 10, nombre: "Raqueta de tenis", categoria: "tenis", stock: 2, precio: 3100, rutaImg: "raqueta-de-tenis.jpg"},
+    { id: 2, nombre: "Gorra de beisbol", categoria: "beisbol", stock: 12, precio: 800, rutaImg: "gorra-de-beisbol.jpg"},
+    { id: 9, nombre: "Pelota de tenis", categoria: "tenis", stock: 5, precio: 2200, rutaImg: "pelota-de-tenis.jpg"},
+    { id: 11, nombre: "Bolso de tenis", categoria: "tenis", stock: 8, precio: 990, rutaImg: "bolso-de-tenis.jpg"},
+    { id: 17, nombre: "Medias de futbol", categoria: "futbol", stock: 3, precio: 850, rutaImg: "medias-de-futbol.jpg"},
+    { id: 15, nombre: "Bate de beisbol", categoria: "beisbol", stock: 7, precio: 2300, rutaImg: "bate-de-beisbol.jpg"},
+    { id: 7, nombre: "Bucal de boxeo", categoria: "boxeo", stock: 10, precio: 1100, rutaImg: "bucal-de-boxeo.jpg"},
+    { id: 13, nombre: "Bolsa de boxeo", categoria: "boxeo", stock: 6, precio: 2750, rutaImg: "bolsa-de-boxeo.jpg"}
 ]
 
+let contenedorProductos = document.getElementById("productos")
 
+productos.forEach(producto => {
+    let card = document.createElement("div")
+    card.innerHTML = 
+    `<img class="imagenes" src=./imagenes/${producto.rutaImg}> 
+    <h3>${producto.nombre}</h3>
+    <p>$${producto.precio}</p>
+    <p class="botones">Agregar al carrito</p>
+    `
+    card.className = "tarjeta"
+    contenedorProductos.appendChild(card)
+})
 
 
 let carrito = []
@@ -48,31 +60,6 @@ function agregarAlCarrito(productos, carrito) {
         alert("Se agrego su producto al carrito")
     } else {
         alert("No hay mas stock del producto seleccionado")
-    }
-}
-// funcion para ver el todas las propiedades del producto 
-function verInformacion(productos) {
-    let id = Number(prompt("Seleccione el id del producto que desea ver:\n" + listar(productos)))
-    let productoSeleccionado = productos.find(producto => producto.id === id)
-    alert(`El ID es: ${productoSeleccionado.id}\nEl nombre es: ${productoSeleccionado.nombre}\nLa categoria es: ${productoSeleccionado.categoria}\nEl stock es: ${productoSeleccionado.stock}\nEl precio es: ${productoSeleccionado.precio}`)
-
-}
-
-// funcion para ordenar acendente y desendente depende lo que pida la consigna
-function ordenar(productos, propiedad, esAscendente) {
-    productos.sort((a, b) => {
-        if (a[propiedad] < b[propiedad]) {
-            return -1
-        }
-        if (a[propiedad] > b[propiedad]) {
-            return 1
-        }
-
-        return 0
-    })
-    if (!esAscendente) {
-        productos.reverse()
-
     }
 }
 

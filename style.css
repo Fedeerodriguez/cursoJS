@@ -1,3 +1,14 @@
+html{
+    height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -27,7 +38,7 @@
 }
 
  h3{
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 10px;
 }
 .botones{
@@ -43,8 +54,34 @@
 .botones:hover{
     background: #2fb4cc;
     color: #fff;
+    cursor: pointer;
 }
  .imagenes{
     width: 200px;
     height: 200px;
 } 
+
+#carrito{
+    width: 100%;
+    
+}
+
+
+
+
+
+
+
+
+
+footer{
+    margin-top: auto;
+}
+.piepagina{
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    
+}

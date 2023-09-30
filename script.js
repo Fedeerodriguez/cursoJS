@@ -17,6 +17,12 @@ let productos = [
 
 let carrito = []
 
+let carritoRecuperado = localStorage.getItem("carrito")
+if(carritoRecuperado){
+    carrito = JSON.parse(carritoRecuperado)
+}
+renderizarCarrito(carrito)
+
 renderizarProductos(productos, carrito)
 
 
@@ -28,31 +34,16 @@ function renderizarProductos(productos, carrito) {
         let card = document.createElement("div")
         card.innerHTML =
             `<img class="imagenes" src=./imagenes/${producto.rutaImg}> 
-    <h3>${producto.nombre}</h3>
-    <p>$${producto.precio}</p>
-    <p id=${producto.id} class="botones">Agregar al carrito</p>
-    `
+             <h3>${producto.nombre}</h3>
+             <p>$${producto.precio}</p>
+             <p id=${producto.id} class="botones">Agregar al carrito</p>
+            `
         card.className = "tarjeta"
         contenedorProductos.appendChild(card)
         let botonAgregarAlCarrito = document.getElementById(producto.id)
         botonAgregarAlCarrito.addEventListener("click", (e) => agregarAlCarrito(productos, carrito, e))
     })
 }
-
-let buscador = document.getElementById("buscador")
-let buscar = document.getElementById("buscar")
-
-buscar.addEventListener("click", () => buscarinput(productos))
-
-function buscarinput(productos) {
-    let filtrarProductos = productos.filter(producto => producto.nombre.includes(buscador.value))
-    renderizarProductos(filtrarProductos)
-}
-
-
-
-
-
 
 // funcion para agregar al carrito
 function agregarAlCarrito(productos, carrito, e) {
@@ -73,40 +64,88 @@ function agregarAlCarrito(productos, carrito, e) {
             })
         }
         productoBuscado.stock--
-        alert("Se agrego su producto al carrito")
+        localStorage.setItem("carrito", JSON.stringify(carrito))
     } else {
         alert("No hay mas stock del producto seleccionado")
     }
+
     renderizarCarrito(carrito)
 }
 
 
 function renderizarCarrito(productosEnElCarrito) {
-    let productosEnCarrito = document.getElementById("carrito")
-    productosEnCarrito.innerHTML = ""
+    
+if(productosEnElCarrito.length > 0){
+    let divCarrito = document.getElementById("carrito")
+    divCarrito.innerHTML = ""
 
     productosEnElCarrito.forEach(producto => {
         let tarjetaEnCarrito = document.createElement("div")
+        tarjetaEnCarrito.className = "tarjeta"
         tarjetaEnCarrito.innerHTML = `
-        <img class="imagenes" src=./imagenes/${producto.rutaImg}> 
-        <h3>${producto.nombre}</h3>
-        <p>$${producto.precioUnitario}</p>
-        <p>${producto.unidades}</p>
-        <p>$${producto.subtotal}</p>`
-
-        productosEnCarrito.appendChild(tarjetaEnCarrito)
+             <img class="imagenes" src=./imagenes/${producto.rutaImg}>
+             <h3>${producto.nombre}</h3>
+             <p>Precio: $${producto.precioUnitario}</p>
+             <p> Cantidad: ${producto.unidades}</p>
+             <p>Subtotal: $${producto.subtotal}</p>
+             
+            `
+            console.log(tarjetaEnCarrito.innerHTML)
+        divCarrito.appendChild(tarjetaEnCarrito)
+        
     })
-
+    
 }
+   
+}
+
+
+let buscador = document.getElementById("buscador")
+let buscar = document.getElementById("buscar")
+
+buscar.addEventListener("click", () => buscaryfiltrar(productos))
+
+function buscaryfiltrar(productos) {
+    let filtrarProductos = productos.filter(producto => {
+       return producto.nombre.includes(buscador.value)}) 
+    renderizarProductos(filtrarProductos)
+}
+
+
+let botonVerOcultar = document.getElementById("verOcultar")
+botonVerOcultar.addEventListener("click", verOcultarCarrito)
+
+
+function verOcultarCarrito() {
+    let carrito = document.getElementById("carrito")
+    let productos = document.getElementById("productos")
+    
+    carrito.classList.toggle("oculta")
+    productos.classList.toggle("oculta")
+}
+
+let botonesCategorias = document.getElementsByClassName("categorias")
+for (const botonCategoria of botonesCategorias) {
+    botonCategoria.addEventListener("click", (e)=> filtrarCategorias(e, productos))
+    
+}
+
+function filtrarCategorias(e, productos) {
+    let productosFiltrados = productos.filter(producto => {
+       return producto.categoria === e.target.id})
+    renderizarProductos(productosFiltrados)
+}
+
+
+
 // funcion para finalizar la compra de los productos
-function finalizarSuCompra(carrito) {
-    if (carrito.length === 0) {
-        alert("Primero debe agregar un producto al carrito para finalizar correctamente su compra")
-    } else {
-        let total = carrito.reduce((acum, produto) => acum + produto.subtotal, 0)
-        alert("El total a pagar por su compra es $ " + total)
-        alert("Gracias por su compra")
-    }
-
+/* function finalizarCompra(carrito) {
+    carrito = []
+    localStorage.removeItem("carrito")
+    renderizarCarrito([])
 }
+   
+        let total = carrito.reduce((acum, produto) => acum + produto.subtotal, 0)
+        */
+
 

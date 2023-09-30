@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,21 +8,35 @@
     <title>Fede Sports</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
-        <h1>Fede Sports</h1>
+        <div class="logo">
+            <h1>Fede Sports</h1>
+        </div>
         <nav>
-            
-            <input id="buscador" type="text" >
+            <p id="futbol" class="categorias">futbol</p>
+            <p id="beisbol" class="categorias">beisbol</p>
+            <p id="tenis" class="categorias">tenis</p>
+            <p id="boxeo" class="categorias">boxeo</p>
+            <input id="buscador" type="text">
             <button id="buscar">Buscar</button>
         </nav>
-    <hr>
+        <hr>
     </header>
     <main>
-        <div id="carrito"></div>
-        <div id="productos" class="Contenedor">
-
+        <p class="texto-main">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum tempora aliquam quos
+            laborum repellat numquam fuga non, temporibus quod reprehenderit illum nobis quisquam obcaecati odio velit
+            quidem eligendi nihil dolor. Animi officia sequi repudiandae fuga distinctio, accusantium consectetur alias
+            eum cum excepturi odio natus fugit? A autem modi dolore tenetur, doloribus illo nobis, magni vero quae
+            voluptates, delectus libero tempore?</p>
+        <button id="verOcultar">Ver o oculta carrito</button>
+        <div class="oculta" id="carrito">
+            <p>No hay productos en el carrito, por favor añadalos para poder realizar su compra.</p>
         </div>
+        <div id="productos"></div>
+
+
     </main>
     <footer>
         <div class="piepagina">
@@ -33,4 +48,5 @@
 
     <script src="./script.js"></script>
 </body>
+
 </html>

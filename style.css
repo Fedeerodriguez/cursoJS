@@ -6,6 +6,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    font-family: sans-serif;
 
 }
 
@@ -15,8 +16,50 @@ body{
     box-sizing: border-box;
 }
 
+header{
+    display: flex;
+    height: 80px;
+    background-color: coral;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
 
- .Contenedor{
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    height: 100px;
+    margin-right: 10px;
+}
+
+.texto-main{
+    font-weight: 600;
+    margin-top: 20px;
+    padding: 15px;
+
+}
+
+.categorias{
+    margin-top: 10px;
+    margin-right: 15px;
+    margin-bottom: 5px;
+    display: inline-block;
+    padding: 10px;
+    color: black;
+    border: 1px solid #2fb4cc;
+    border-radius: 4px;
+    transform: all 400ms ease;
+}
+.categorias:hover{
+    background: #2fb4cc;
+    color: #fff;
+    cursor: pointer;
+}
+
+ #productos{
     display: flex;
     flex-wrap: wrap;
     
@@ -63,10 +106,13 @@ body{
 
 #carrito{
     width: 100%;
-    
+    display: flex;
+    border-radius: 1px solid black;
 }
 
-
+.oculta{
+    display: none!important;
+}
 
 
 

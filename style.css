@@ -106,8 +106,17 @@ header{
 
 #carrito{
     width: 100%;
+    min-height: 80px;
+    background-color: coral;
     display: flex;
-    border-radius: 1px solid black;
+   border: 1px solid black;
+}
+#verOcultar img{
+    height: 24px;
+}
+#carrito p{
+    display: flex;
+    align-items: center;
 }
 
 .oculta{

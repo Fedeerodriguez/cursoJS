@@ -32,11 +32,11 @@ function renderizarProductos(productos, carrito) {
 
     productos.forEach(producto => {
         let card = document.createElement("div")
-        card.innerHTML =
-            `<img class="imagenes" src=./imagenes/${producto.rutaImg}> 
+        card.innerHTML = `
+             <img class="imagenes" src=./imagenes/${producto.rutaImg}> 
              <h3>${producto.nombre}</h3>
              <p>$${producto.precio}</p>
-             <p id=${producto.id} class="botones">Agregar al carrito</p>
+             <p id=${producto.id} class=botones>Agregar al carrito</p>
             `
         card.className = "tarjeta"
         contenedorProductos.appendChild(card)
@@ -83,7 +83,7 @@ if(productosEnElCarrito.length > 0){
         let tarjetaEnCarrito = document.createElement("div")
         tarjetaEnCarrito.className = "tarjeta"
         tarjetaEnCarrito.innerHTML = `
-             <img class="imagenes" src=./imagenes/${producto.rutaImg}>
+             
              <h3>${producto.nombre}</h3>
              <p>Precio: $${producto.precioUnitario}</p>
              <p> Cantidad: ${producto.unidades}</p>
@@ -94,7 +94,10 @@ if(productosEnElCarrito.length > 0){
         divCarrito.appendChild(tarjetaEnCarrito)
         
     })
-    
+    let boton = document.createElement("button")
+    boton.innerHTML = "Finalizar compra"
+    boton.addEventListener("click", ()=> finalizarCompra(carrito))
+    divCarrito.appendChild(boton)
 }
    
 }
@@ -139,13 +142,16 @@ function filtrarCategorias(e, productos) {
 
 
 // funcion para finalizar la compra de los productos
-/* function finalizarCompra(carrito) {
-    carrito = []
+
+ function finalizarCompra() {
+    let carrito = document.getElementById("carrito")
+    carrito.innerHTML = ""
     localStorage.removeItem("carrito")
-    renderizarCarrito([])
-}
+    
+    let total = carrito.reduce((acum, produto) => acum + produto.subtotal, 0)
+} 
    
-        let total = carrito.reduce((acum, produto) => acum + produto.subtotal, 0)
-        */
+        
+       
 
 

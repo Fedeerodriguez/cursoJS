@@ -148,10 +148,10 @@ function filtrarCategorias(e, productos) {
     carrito.innerHTML = ""
     localStorage.removeItem("carrito")
     
-    let total = carrito.reduce((acum, produto) => acum + produto.subtotal, 0)
+    
 } 
    
-        
+ //let total = carrito.reduce((acum, produto) => acum + produto.subtotal, 0)    
        
 
 

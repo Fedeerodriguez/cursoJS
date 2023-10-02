@@ -18,7 +18,7 @@ body{
 
 header{
     display: flex;
-    height: 80px;
+    min-height:80px;
     background-color: coral;
     justify-content: space-between;
     align-items: center;
@@ -32,7 +32,7 @@ header{
 
 .logo img{
     height: 100px;
-    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .texto-main{

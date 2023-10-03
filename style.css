@@ -119,12 +119,33 @@ header{
     align-items: center;
 }
 
+.botonfinalizar{
+    width: 80px;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: inline-block;
+    padding: 10px;
+    color: #2fb4cc;
+    border: 1px solid #2fb4cc;
+    border-radius: 4px;
+    transform: all 400ms ease;
+}
+.botonfinalizar:hover{
+    background: #2fb4cc;
+    color: #fff;
+    cursor: pointer;
+}
+
 .oculta{
     display: none!important;
 }
 
-
-
+.tostada{
+    color: white; 
+    background-color: #2fb4cc;
+    border-radius: 15px;
+}
 
 
 
@@ -139,4 +160,8 @@ footer{
     padding: 10px;
     margin-top: auto;
     
+}
+
+.color{
+    background-color: #0000ff;
 }

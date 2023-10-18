@@ -1,32 +1,34 @@
 
-// El array de objetos (Los productos)
-let productos = [
-    { id: 4, nombre: "guantes de boxeo", categoria: "boxeo", stock: 5, precio: 1500, rutaImg: "guantes-de-boxeo.jpg" },
-    { id: 6, nombre: "pelota de futbol", categoria: "futbol", stock: 9, precio: 1900, rutaImg: "pelota-de-futbol.jpg" },
-    { id: 8, nombre: "guantes de beisbol", categoria: "beisbol", stock: 4, precio: 700, rutaImg: "guante-de-beisbol.jpg" },
-    { id: 12, nombre: "guantes de golero", categoria: "futbol", stock: 7, precio: 1400, rutaImg: "guantes-de-golero.jpg" },
-    { id: 10, nombre: "raqueta de tenis", categoria: "tenis", stock: 2, precio: 3100, rutaImg: "raqueta-de-tenis.jpg" },
-    { id: 2, nombre: "gorra de beisbol", categoria: "beisbol", stock: 12, precio: 800, rutaImg: "gorra-de-beisbol.jpg" },
-    { id: 9, nombre: "pelota de tenis", categoria: "tenis", stock: 5, precio: 2200, rutaImg: "pelota-de-tenis.jpg" },
-    { id: 11, nombre: "bolso de tenis", categoria: "tenis", stock: 8, precio: 990, rutaImg: "bolso-de-tenis.jpg" },
-    { id: 17, nombre: "medias de futbol", categoria: "futbol", stock: 3, precio: 850, rutaImg: "medias-de-futbol.jpg" },
-    { id: 15, nombre: "bate de beisbol", categoria: "beisbol", stock: 7, precio: 2300, rutaImg: "bate-de-beisbol.jpg" },
-    { id: 7, nombre: "bucal de boxeo", categoria: "boxeo", stock: 10, precio: 1100, rutaImg: "bucal-de-boxeo.jpg" },
-    { id: 13, nombre: "bolsa de boxeo", categoria: "boxeo", stock: 6, precio: 2750, rutaImg: "bolsa-de-boxeo.jpg" }
-]
-
-let carrito = []
+fetch("./info.json")
+    .then(respuesta => respuesta.json())
+    .then(productos => principal(productos))
+function principal(productos) {
+    let carrito = []
 
 let carritoRecuperado = localStorage.getItem("carrito")
-if(carritoRecuperado){
+if (carritoRecuperado) {
     carrito = JSON.parse(carritoRecuperado)
 }
-renderizarCarrito(carrito)
+renderizarCarrito()
 
-renderizarProductos(productos, carrito)
+renderizarProductos(productos)
 
+let buscador = document.getElementById("buscador")
+let buscar = document.getElementById("buscar")
 
-function renderizarProductos(productos, carrito) {
+buscar.addEventListener("click", () => buscaryfiltrar(productos,buscador))
+
+let botonVerOcultar = document.getElementById("verOcultar")
+
+botonVerOcultar.addEventListener("click", verOcultarCarrito)
+
+let botonesCategorias = document.getElementsByClassName("categorias")
+for (const botonCategoria of botonesCategorias) {
+    botonCategoria.addEventListener("click", (e) => filtrarCategorias(e, productos))
+}
+}
+
+function renderizarProductos(productos) {
     let contenedorProductos = document.getElementById("productos")
     contenedorProductos.innerHTML = ""
 
@@ -41,12 +43,12 @@ function renderizarProductos(productos, carrito) {
         card.className = "tarjeta"
         contenedorProductos.appendChild(card)
         let botonAgregarAlCarrito = document.getElementById(producto.id)
-        botonAgregarAlCarrito.addEventListener("click", (e) => agregarAlCarrito(productos, carrito, e))
+        botonAgregarAlCarrito.addEventListener("click", (e) => agregarAlCarrito(productos, e))
     })
 }
 
-// funcion para agregar al carrito
-function agregarAlCarrito(productos, carrito, e) {
+function agregarAlCarrito(productos, e) {
+    let carrito = obtenerCarrito()
     let productoBuscado = productos.find(producto => producto.id === Number(e.target.id))
     let productosEnCarrito = carrito.find(producto => producto.id === productoBuscado.id)
 
@@ -71,20 +73,20 @@ function agregarAlCarrito(productos, carrito, e) {
         alertas("Lo siento", "No hay mas stock del producto deseado", "error", true)
     }
 
-    renderizarCarrito(carrito)
+    renderizarCarrito()
+
 }
 
+function renderizarCarrito() {
+    let productosEnElCarrito = obtenerCarrito()
+    if (productosEnElCarrito.length > 0) {
+        let divCarrito = document.getElementById("carrito")
+        divCarrito.innerHTML = ""
 
-function renderizarCarrito(productosEnElCarrito) {
-    
-if(productosEnElCarrito.length > 0){
-    let divCarrito = document.getElementById("carrito")
-    divCarrito.innerHTML = ""
-
-    productosEnElCarrito.forEach(producto => {
-        let tarjetaEnCarrito = document.createElement("div")
-        tarjetaEnCarrito.className = "tarjeta"
-        tarjetaEnCarrito.innerHTML = `
+        productosEnElCarrito.forEach(producto => {
+            let tarjetaEnCarrito = document.createElement("div")
+            tarjetaEnCarrito.className = "tarjeta"
+            tarjetaEnCarrito.innerHTML = `
              <img class="imagenes" src=./imagenes/${producto.rutaImg}>
              <h3>${producto.nombre}</h3>
              <p>Precio: $${producto.precioUnitario}</p>
@@ -92,67 +94,56 @@ if(productosEnElCarrito.length > 0){
              <p>Subtotal: $${producto.subtotal}</p>
              
             `
-            console.log(tarjetaEnCarrito.innerHTML)
-        divCarrito.appendChild(tarjetaEnCarrito)
-        
-    })
-    let boton = document.createElement("button")
-    boton.innerHTML = "Finalizar compra"
-    boton.className = "botonfinalizar"
-    boton.addEventListener("click", ()=> finalizarCompra(carrito))
-    divCarrito.appendChild(boton)
+            divCarrito.appendChild(tarjetaEnCarrito)
+
+        })
+        let boton = document.createElement("button")
+        boton.innerHTML = "Finalizar compra"
+        boton.className = "botonfinalizar"
+        boton.addEventListener("click", () => finalizarCompra(carrito))
+        divCarrito.appendChild(boton)
+    /*     let totalAPagar = document.createElement("p")
+        totalAPagar.innerHTML = pago()
+        divCarrito.appendChild(totalAPagar) */
+
+    }
+
+
 }
-   
-}
 
 
-let buscador = document.getElementById("buscador")
-let buscar = document.getElementById("buscar")
-
-buscar.addEventListener("click", () => buscaryfiltrar(productos))
-
-function buscaryfiltrar(productos) {
+function buscaryfiltrar(productos, buscador) {
     let filtrarProductos = productos.filter(producto => {
-       return producto.nombre.includes(buscador.value)}) 
+        return producto.nombre.toLowerCase().includes(buscador.value)
+    })
     renderizarProductos(filtrarProductos)
 }
-
-
-let botonVerOcultar = document.getElementById("verOcultar")
-botonVerOcultar.addEventListener("click", verOcultarCarrito)
 
 
 function verOcultarCarrito() {
     let carrito = document.getElementById("carrito")
     let productos = document.getElementById("productos")
-    
+
     carrito.classList.toggle("oculta")
     productos.classList.toggle("oculta")
 }
 
-let botonesCategorias = document.getElementsByClassName("categorias")
-for (const botonCategoria of botonesCategorias) {
-    botonCategoria.addEventListener("click", (e)=> filtrarCategorias(e, productos))
-    
-}
 
 function filtrarCategorias(e, productos) {
     let productosFiltrados = productos.filter(producto => {
-       return producto.categoria === e.target.id})
+        return producto.categoria === e.target.id
+    })
     renderizarProductos(productosFiltrados)
 }
 
 
-
-// funcion para finalizar la compra de los productos
-
- function finalizarCompra() {
+function finalizarCompra() {
     let carrito = document.getElementById("carrito")
     carrito.innerHTML = "Ingrese productos para finalizar su compra"
     localStorage.removeItem("carrito")
     alertas("Gracias por su compra", "Su compra fue realizada con exito", "success", true)
-    
-} 
+
+}
 
 function alertas(title, text, icon, showconfirmButton, timer) {
     Swal.fire({
@@ -171,11 +162,18 @@ function totatada(text, duration) {
         className: "tostada",
         style: {
             background: "linear-gradient(to right, #2fb4cc, #0000ff)",
-          }
-        }).showToast()
+        }
+    }).showToast()
 }
-   
-//let total = carrito.reduce((acum, produto) => acum + produto.subtotal, 0)  
-       
+
+function obtenerCarrito() {
+    return JSON.parse(localStorage.getItem("carrito")) || []
+}
+
+/* function pago() {
+    return carrito.reduce((acum, produto) => acum + produto.subtotal, 0)
+} */
+
+
 
 

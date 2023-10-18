@@ -39,6 +39,7 @@ header{
     font-weight: 600;
     margin-top: 20px;
     padding: 15px;
+    text-align: center;
 
 }
 
@@ -111,6 +112,7 @@ header{
     display: flex;
    border: 1px solid black;
 }
+
 #verOcultar img{
     height: 24px;
 }

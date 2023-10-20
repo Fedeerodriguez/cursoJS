@@ -3,29 +3,29 @@ fetch("./info.json")
     .then(respuesta => respuesta.json())
     .then(productos => principal(productos))
 function principal(productos) {
-    let carrito = []
 
-let carritoRecuperado = localStorage.getItem("carrito")
-if (carritoRecuperado) {
-    carrito = JSON.parse(carritoRecuperado)
-}
-renderizarCarrito()
 
-renderizarProductos(productos)
+    let carritoRecuperado = localStorage.getItem("carrito")
+    if (carritoRecuperado) {
+        carrito = JSON.parse(carritoRecuperado)
+    }
+    renderizarCarrito()
 
-let buscador = document.getElementById("buscador")
-let buscar = document.getElementById("buscar")
+    renderizarProductos(productos)
 
-buscar.addEventListener("click", () => buscaryfiltrar(productos,buscador))
+    let buscador = document.getElementById("buscador")
+    let buscar = document.getElementById("buscar")
 
-let botonVerOcultar = document.getElementById("verOcultar")
+    buscar.addEventListener("click", () => buscaryfiltrar(productos, buscador))
 
-botonVerOcultar.addEventListener("click", verOcultarCarrito)
+    let botonVerOcultar = document.getElementById("verOcultar")
 
-let botonesCategorias = document.getElementsByClassName("categorias")
-for (const botonCategoria of botonesCategorias) {
-    botonCategoria.addEventListener("click", (e) => filtrarCategorias(e, productos))
-}
+    botonVerOcultar.addEventListener("click", verOcultarCarrito)
+
+    let botonesCategorias = document.getElementsByClassName("categorias")
+    for (const botonCategoria of botonesCategorias) {
+        botonCategoria.addEventListener("click", (e) => filtrarCategorias(e, productos))
+    }
 }
 
 function renderizarProductos(productos) {
@@ -102,10 +102,6 @@ function renderizarCarrito() {
         boton.className = "botonfinalizar"
         boton.addEventListener("click", () => finalizarCompra(carrito))
         divCarrito.appendChild(boton)
-    /*     let totalAPagar = document.createElement("p")
-        totalAPagar.innerHTML = pago()
-        divCarrito.appendChild(totalAPagar) */
-
     }
 
 
@@ -171,7 +167,7 @@ function obtenerCarrito() {
 }
 
 /* function pago() {
-    return carrito.reduce((acum, produto) => acum + produto.subtotal, 0)
+    return localStorage.getItem("carrito").reduce((acum, produto) => acum + produto.subtotal, 0)
 } */
 
 

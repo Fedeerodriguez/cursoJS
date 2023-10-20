@@ -166,9 +166,7 @@ function obtenerCarrito() {
     return JSON.parse(localStorage.getItem("carrito")) || []
 }
 
-/* function pago() {
-    return localStorage.getItem("carrito").reduce((acum, produto) => acum + produto.subtotal, 0)
-} */
+
 
 
 
